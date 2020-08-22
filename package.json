@@ -1,0 +1,24 @@
+{
+  "name": "LearningNode.js",
+  "version": "1.0.0",
+  "description": "I will be using this repository to learn Node.js.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LearningTheStack/LearningNode.js.git"
+  },
+  "keywords": [],
+  "author": "Elliott",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LearningTheStack/LearningNode.js/issues"
+  },
+  "homepage": "https://github.com/LearningTheStack/LearningNode.js#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4"
+  }
+}
