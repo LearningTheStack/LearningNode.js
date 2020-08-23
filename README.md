@@ -1,6 +1,14 @@
 # LearningNode.js
+
+An ecommerce app.
+
 I will be using this repository to learn Node.js.
 
+
 Dependencies:
-Express: Transforms our package into a fully fledged web server.
-Nodemon: Allows our server to constantly update when we change a file.
+express: Transforms our package into a fully fledged web server.
+nodemon: Allows our server to constantly update when we change a file.
+body-parser: Parses the body of HTTP requests from buffer (list of bytes) to strings.
+crypto: Used to generate random ids for records saved in our file storage.
+fs: Used to access file storage.
+users

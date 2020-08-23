@@ -1,6 +1,9 @@
-//require
+//required packages
 const express = require('express');
 const bodyParser = require('body-parser');
+//this is our users.js package
+//'./' says look in current directory
+const usersRepo = require('./repositories/users');
 
 //initialise
 const app = express();
@@ -28,8 +31,20 @@ app.get('/', (req, res) => {
 
 
 //root address (POST request from above form)
-app.post('/', (req,res) => {
-    console.log(req.body);
+//async required since we are using await functions
+app.post('/', async (req,res) => {
+    //deconstruct the object created by the request
+    const { email, password, passwordConfirmation } = req.body;
+    //use our repo command getOneBy with filter email
+    //to see if this email was already used
+    const existingUser = await usersRepo.getOneBy({ email });
+    if (existingUser) {
+        return res.send('This email is already in use.');
+    }
+    if (password !== passwordConfirmation) {
+        return res.send('The passwords you entered do not match.');
+    }
+
     res.send('Account created!');
 });
 
