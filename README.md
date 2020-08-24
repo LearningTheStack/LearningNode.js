@@ -5,7 +5,7 @@ An ecommerce app.
 I will be using this repository to learn Node.js.
 
 
-Dependencies:
+## Dependencies
 
 express: Transforms our package into a fully fledged web server.
 
