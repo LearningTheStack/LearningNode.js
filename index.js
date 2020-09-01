@@ -5,6 +5,7 @@ const cookieSession = require('cookie-session');
 const authRouter = require('./routes/admin/auth');
 const adminProductsRouter = require('./routes/admin/products');
 const productsRouter = require('./routes/products');
+const cartsRouter = require('./routes/carts');
 
 //initialise
 const app = express();
@@ -27,6 +28,7 @@ app.use(cookieSession({
 app.use(authRouter);
 app.use(adminProductsRouter);
 app.use(productsRouter);
+app.use(cartsRouter);
 
 //start listening for requests
 app.listen(3000, () => {
