@@ -3,10 +3,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const authRouter = require('./routes/admin/auth');
+const productsRouter = require('./routes/admin/products');
 
 //initialise
 const app = express();
 
+//import public folder
+//checks if there is a file in the public directory
+//which matches the incoming request
+//localhost:3000/css/main.css for example
+app.use(express.static('public'));
 //app.use is applied to every incoming request
 //every request will be body parsed
 //parses body buffer to a useable object
@@ -18,6 +24,7 @@ app.use(cookieSession({
 }));
 //link up our sub router from auth.js to this main file
 app.use(authRouter);
+app.use(productsRouter);
 
 //start listening for requests
 app.listen(3000, () => {
