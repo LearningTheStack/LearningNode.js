@@ -30,7 +30,9 @@ app.use(adminProductsRouter);
 app.use(productsRouter);
 app.use(cartsRouter);
 
+
+const port = process.env.PORT || 3000;
 //start listening for requests
-app.listen(80, () => {
-    console.log('Listening on 80');
+app.listen(port, () => {
+    console.log(`Listening on ${port}`);
 });
