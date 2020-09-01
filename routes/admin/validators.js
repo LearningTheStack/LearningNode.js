@@ -39,7 +39,7 @@ module.exports = {
         .withMessage('Must be between 4 and 20 characters')
         //{ req } is equivalent to obj and const req = obj.req;
         //check if the passwords entered match
-        .custom((passwordConfirmation, { req }) => {
+        .custom(async (passwordConfirmation, { req }) => {
             if (passwordConfirmation !== req.body.password) {
                 throw new Error('The passwords you entered do not match.');
             }

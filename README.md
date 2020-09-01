@@ -22,3 +22,5 @@ cookie-session: Used to manage cookies for our users.
 util: Used to gain the promisify version of a function.
  
 express validator: Used to validate and sanitise data entered into our forms.
+
+multer: Used to parse multipart form data in HTTP reqeuests.

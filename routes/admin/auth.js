@@ -2,8 +2,8 @@ const express = require('express');
 //we only want to use the check function
 //this saves us doing
 //expressValidator.check everytime we want to call it
-const { check, validationResult } = require('express-validator');
 
+const { handleErrors } = require('./middlewares');
 const usersRepo = require('../../repositories/users');
 const signupTemplate = require('../../views/admin/auth/signup');
 const signinTemplate = require('../../views/admin/auth/signin')
@@ -14,6 +14,7 @@ const {
     requireEmailExists,
     requireValidPasswordForUser
     } = require('./validators');
+const signup = require('../../views/admin/auth/signup');
 
 //sub router
 const router = express.Router();
@@ -35,17 +36,11 @@ router.post('/signup',
         requirePassword,
         requirePasswordConfirmation
     ],
+    handleErrors(signupTemplate),
     async (req,res) => {
-        //get errors from the validation and sanitization above
-        const errors = validationResult(req);
-        
-        //check if any errors occured
-        if (!errors.isEmpty()) {
-            return res.send(signupTemplate({ req, errors }));
-        }
 
         //deconstruct the object created by the request
-        const { email, password, passwordConfirmation } = req.body;
+        const { email, password } = req.body;
 
         //create a user in our user repo to represent a person
         //the create method returns the attributes of the user
@@ -57,7 +52,7 @@ router.post('/signup',
         //add in the userId property, assign it to user.id from record
         req.session.userId = user.id;
 
-        res.send('Account created!');
+        res.redirect('/admin/products');
     }
 );
 
@@ -82,13 +77,9 @@ router.post('/signin',
         requireEmailExists,
         requireValidPasswordForUser
     ],
+    handleErrors(signinTemplate),
     async (req,res) => {
-    //get errors from the validation and sanitization above
-    const errors = validationResult(req);
     
-    if (!errors.isEmpty()) {
-        return res.send(signinTemplate({ errors }));
-    }
     //destructure out the email and password from the req.body object
     const { email } = req.body;
     //check a user exists in database with given email
@@ -96,7 +87,7 @@ router.post('/signin',
     
     //authenticate user within our app
     req.session.userId = user.id;
-    res.send('You are now signed in.');
+    res.redirect('/admin/products');
 });
 
 module.exports = router;
